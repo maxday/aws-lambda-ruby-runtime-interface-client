@@ -2,17 +2,12 @@
 ARG DISTRO_VERSION
 
 # Grab a fresh copy of the image and install ruby and build the runtime interface client gem
-FROM centos:${DISTRO_VERSION} AS build-image
+FROM amazonlinux:${DISTRO_VERSION} AS build-image
 
 ARG RUNTIME_VERSION
 
-# Fix repo url
-RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
-RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
-
 RUN yum update -y && \
-    yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel
-RUN yum --enablerepo=powertools install libyaml-devel libffi-devel -y
+    yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison sqlite-devel libyaml-devel
 
 RUN rm -rf /root/.rbenv/
 RUN git clone https://github.com/rbenv/rbenv.git /root/.rbenv
@@ -38,7 +33,7 @@ RUN rake build
 
 
 # Grab a fresh copy of the Ruby image
-FROM centos:${DISTRO_VERSION}
+FROM amazonlinux:${DISTRO_VERSION}
 
 ARG RUNTIME_VERSION
 

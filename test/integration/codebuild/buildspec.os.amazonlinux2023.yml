@@ -2,9 +2,9 @@ version: 0.2
 
 env:
   variables:
-    OS_DISTRIBUTION: alpine
-    EXECUTABLE: "/usr/local/bundle/bin/aws_lambda_ric"
-    TEST_NAME: "aws-lambda-ruby-ric-alpine-test"
+    OS_DISTRIBUTION: amazonlinux
+    EXECUTABLE: "/usr/local/bin/aws_lambda_ric"
+    TEST_NAME: "aws-lambda-ruby-ric-amazonlinux-test"
 batch:
   build-matrix:
     static:
@@ -15,11 +15,9 @@ batch:
       env:
         variables:
           DISTRO_VERSION:
-            - "3.11"
+            - "2023"
           RUNTIME_VERSION:
-            - "2.5"
-            - "2.6"
-            - "2.7"
+            - "3.3"
 phases:
   pre_build:
     commands:
@@ -40,9 +38,6 @@ phases:
       - tar -xvf test/integration/resources/${RIE}.tar.gz --directory "${SCRATCH_DIR}"
       - >
         cp "test/integration/docker/Dockerfile.echo.${OS_DISTRIBUTION}" \
-          "${SCRATCH_DIR}/Dockerfile.echo.${OS_DISTRIBUTION}.tmp"
-      - >
-        echo "RUN apk add curl" >> \
           "${SCRATCH_DIR}/Dockerfile.echo.${OS_DISTRIBUTION}.tmp"
       - >
         echo "COPY ${SCRATCH_DIR}/${RIE} /usr/bin/${RIE}" >> \
