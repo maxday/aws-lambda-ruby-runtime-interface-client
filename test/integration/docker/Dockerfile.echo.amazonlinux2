@@ -7,7 +7,7 @@ FROM amazonlinux:${DISTRO_VERSION} AS build-image
 ARG RUNTIME_VERSION
 
 RUN yum update -y && \
-    yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel
+    yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel libyaml-devel
 
 RUN rm -rf /root/.rbenv/
 RUN git clone https://github.com/rbenv/rbenv.git /root/.rbenv
@@ -34,7 +34,7 @@ RUN rake build
 
 # Grab a fresh copy of the Ruby image
 FROM amazonlinux:${DISTRO_VERSION}
-
+RUN yum update -y && yum install -y libyaml-devel
 ARG RUNTIME_VERSION
 
 # Copy ruby from the build-image

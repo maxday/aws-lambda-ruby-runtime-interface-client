@@ -8,7 +8,7 @@ def get_tomorrow(event:, context:)
 end
 
 def find_dynamic_libs(event:, context:)
-  shared_lib_dep = `ldd /var/lang/lib/ruby/2.7.0/x86_64-linux/*.so`
+  shared_lib_dep = "/opt/hostedtoolcache/Ruby/*/x64/lib/ruby/*/x86_64-linux/*.so"
   if shared_lib_dep.include? "not found"
     return "Missing dependency"
   end

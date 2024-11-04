@@ -7,14 +7,30 @@ on:
     branches: [ '*' ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
 
+  unit_test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby_version: [3.2, 3.3]
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.7
-    - name: Run 'pr' target
-      run: make pr
+      - uses: actions/checkout@v2
+      - name: Set up ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+      - name: Run unit tests
+        run: |
+          make init test-unit
+
+
+  integration_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+      - name: Run 'pr' target
+        run: make pr
