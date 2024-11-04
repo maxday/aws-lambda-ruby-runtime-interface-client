@@ -11,3 +11,4 @@ test/examples/hello-world-docker/pkg
 *.iml
 .DS_Store
 Gemfile.lock
+codebuild.*/
