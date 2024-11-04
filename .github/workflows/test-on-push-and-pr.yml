@@ -20,12 +20,8 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
       - name: Run unit tests
-        env:
-          RUBY_VERSION: ${{ matrix.ruby_version }}
         run: |
-          make init 
-          find / -name "*.so" 2>/dev/null | grep -i ruby
-          make test-unit
+          make init test-unit
 
 
   integration_test:

@@ -8,8 +8,7 @@ def get_tomorrow(event:, context:)
 end
 
 def find_dynamic_libs(event:, context:)
-  version = ENV['RUBY_VERSION']
-  shared_lib_dep = "/var/lang/lib/ruby/#{version}/x86_64-linux/*.so"
+  shared_lib_dep = "/opt/hostedtoolcache/Ruby/*/x64/lib/ruby/*/x86_64-linux/*.so"
   if shared_lib_dep.include? "not found"
     return "Missing dependency"
   end
