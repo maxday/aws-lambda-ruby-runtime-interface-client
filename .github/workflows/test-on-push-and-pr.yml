@@ -23,8 +23,10 @@ jobs:
         env:
           RUBY_VERSION: ${{ matrix.ruby_version }}
         run: |
-          which ruby
+          make init 
+          find / -name "*.so" 2>/dev/null | grep -i ruby
           make test-unit
+
 
   integration_test:
     runs-on: ubuntu-latest
