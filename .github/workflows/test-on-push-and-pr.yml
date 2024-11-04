@@ -23,7 +23,7 @@ jobs:
         env:
           RUBY_VERSION: ${{ matrix.ruby_version }}
         run: |
-          ls /var/lang/lib/ruby/
+          which ruby
           make test-unit
 
   integration_test:
