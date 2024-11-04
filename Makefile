@@ -29,7 +29,7 @@ build:
 	rake build
 
 .PHONY: pr
-pr: init test-unit test-smoke
+pr: init test-smoke test-integ
 
 define HELP_MESSAGE
 
