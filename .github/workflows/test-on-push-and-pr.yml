@@ -19,7 +19,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
       - name: Run unit tests
-        run: make test-unit
+        run: ruby test/run_tests.rb unit
 
   integration_test:
     runs-on: ubuntu-latest
