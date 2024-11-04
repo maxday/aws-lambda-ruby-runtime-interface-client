@@ -16,6 +16,6 @@ class LambdaLogFormatterTest < Minitest::Test
 
     actual = under_test.call('INFO', time, progname, msg)
 
-    assert_equal "I, [#{time.strftime("%Y-%m-%dT%H:%M:%S.%6N")} ##{$$}]  INFO #{$_global_aws_request_id} -- #{progname}: #{msg}", actual
+    assert_equal "I, [#{time.strftime("%Y-%m-%dT%H:%M:%S.%6N")}##{$$}]  INFO #{$_global_aws_request_id} -- #{progname}: #{msg}", actual
   end
 end
